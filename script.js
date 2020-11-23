@@ -13,10 +13,10 @@ const newGallery = gallery.map(({description, preview, original})=>{
 }).join('');
 jsGallery.innerHTML = newGallery;
 
-// === НАВЕШИВАЕМ СЛУШАТЕЛИ ===
+// === СЛУШАТЕЛЬ ОТКРЫТИЯ МОДОЛКИ ===
 jsGallery.addEventListener("click", openModal);
 
-// === РАСПИСЫВАЕМ ФУНКЦИИ ===
+// === РАСПИСЫВАЕМ ФУНКЦИИ И ДОБАВЛЯЕМ & СНИМАЕМ СЛУШАТЕЛИ===
 function openModal(event) {
     event.preventDefault();
     jsLightbox.classList.add('is-open');
@@ -43,7 +43,7 @@ function pressESC(event) {
 // === ДЕЛАЕМ СЛАЙДЕР ===
 function sliDer(event) {
     const indexImg = gallery.map(elem => elem.original).indexOf(lightboxImage.src)
-    if (event.key === 'ArrowRight' && jsLightbox.classList.contains('is-open')) {
+    if (event.key === 'ArrowRight') {
         if (indexImg < gallery.length - 1) {
             return lightboxImage.src = gallery[indexImg + 1].original;
         }
@@ -51,7 +51,7 @@ function sliDer(event) {
             return lightboxImage.src = gallery[0].original;
         }
     }
-    if (event.key === 'ArrowLeft' && jsLightbox.classList.contains('is-open')) {
+    if (event.key === 'ArrowLeft') {
         if (indexImg > 0) {
         return lightboxImage.src = gallery[indexImg - 1].original;
         }
