@@ -15,9 +15,6 @@ jsGallery.innerHTML = newGallery;
 
 // === НАВЕШИВАЕМ СЛУШАТЕЛИ ===
 jsGallery.addEventListener("click", openModal);
-buttonClose.addEventListener("click", closeModal)
-lightboxOverlay.addEventListener("click", closeModal)
-document.addEventListener('keydown', sliDer);
 
 // === РАСПИСЫВАЕМ ФУНКЦИИ ===
 function openModal(event) {
@@ -25,17 +22,25 @@ function openModal(event) {
     jsLightbox.classList.add('is-open');
     lightboxImage.src = event.target.dataset.source;
     window.addEventListener('keydown', pressESC);
+    document.addEventListener('keydown', sliDer);
+    buttonClose.addEventListener("click", closeModal);
+    lightboxOverlay.addEventListener("click", closeModal);
 };
 function closeModal(event) {
     event.preventDefault();
     jsLightbox.classList.remove('is-open');
     lightboxImage.src = ""
+    window.removeEventListener('keydown', pressESC);
+    document.removeEventListener('keydown', sliDer);
+    buttonClose.removeEventListener("click", closeModal);
+    lightboxOverlay.removeEventListener("click", closeModal);
 };
 function pressESC(event) {
     if (event.code === 'Escape') {
         closeModal(event);
     }
 };
+// === ДЕЛАЕМ СЛАЙДЕР ===
 function sliDer(event) {
     const indexImg = gallery.map(elem => elem.original).indexOf(lightboxImage.src)
     if (event.key === 'ArrowRight' && jsLightbox.classList.contains('is-open')) {
