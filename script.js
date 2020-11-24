@@ -19,12 +19,17 @@ jsGallery.addEventListener("click", openModal);
 // === РАСПИСЫВАЕМ ФУНКЦИИ И ДОБАВЛЯЕМ & СНИМАЕМ СЛУШАТЕЛИ===
 function openModal(event) {
     event.preventDefault();
+    if (event.target.nodeName !== "IMG") {
+return;
+}
+else {
     jsLightbox.classList.add('is-open');
     lightboxImage.src = event.target.dataset.source;
     window.addEventListener('keydown', pressESC);
     document.addEventListener('keydown', sliDer);
     buttonClose.addEventListener("click", closeModal);
     lightboxOverlay.addEventListener("click", closeModal);
+}
 };
 function closeModal(event) {
     event.preventDefault();
